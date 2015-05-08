@@ -1,22 +1,16 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
+
 use warnings;
 use strict;
 use Carp;
 use Getopt::Long;
 use Pod::Usage;
 
-BEGIN {($_=$0)=~s{[^\\\/]+$}{};$_||="./"}
-use lib $_, $_."kext";
-#use kc;
-
-our $VERSION = 			'$Revision: 362 $';
-our $LAST_CHANGED_DATE =	'$LastChangedDate: 2010-06-15 11:09:48 -0400 (Tue, 15 Jun 2010) $';
-
 our ($verbose, $help, $man);
 our ($inputfile, $hmmfile);
-our ($output, $signalfile, $snpposfile, $bin, $grid);
+our ($output, $snpposfile, $bin, $grid);
 
-GetOptions ('verbose|v'=>\$verbose, 'help|h'=>\$help, 'man|m'=>\$man, 'output=s'=>\$output, 'signalfile=s'=>\$signalfile, 'snpposfile=s'=>\$snpposfile, 
+GetOptions ('verbose|v'=>\$verbose, 'help|h'=>\$help, 'man|m'=>\$man, 'output=s'=>\$output, 'snpposfile=s'=>\$snpposfile, 
 	'bin=i'=>\$bin, 'grid=i'=>\$grid) or pod2usage ();
 
 $help and pod2usage (-verbose=>1, -exitval=>1, -output=>\*STDOUT);
@@ -31,7 +25,7 @@ $bin > 2 or pod2usage ("Error: the -bin argument must be higher than 2");
 $grid ||= 10;
 $grid > 2 or pod2usage ("Error in argument: the --grid argument must be higher than 2");
 
-if (defined $output) {	#when --nfperfile is set, we need to write to a file (rather than STDOUT)
+if (defined $output) {
 	open (STDOUT, ">$output") or confess "Error: cannot write to output file $output: $!\n";
 }
 
@@ -120,9 +114,7 @@ sub calculateBAFLikelihood {
 	for my $i (0 .. @baf-1) {
 		$baf[$i] > 0.5 and $baf[$i] = 1-$baf[$i];
 		$baf[$i] >=0 and $baf[$i] <=1 or print STDERR "WARNING: skipping invalid BAF values $baf[$i]\n" and next;
-		#print STDERR "NOTICE: baf=$baf[$i] pdf=", kc::pdf_normal ($baf[$i], 0, 0.016372), " and ", kc::pdf_normal ($baf[$i], 0.5, 0.034982), "\n";
 		for my $j (0 .. $grid) {
-			#my $like = (1-$h) * kc::pdf_normal ($baf[$i], 0, $sd[0]) + $h * kc::pdf_normal ($baf[$i], $mu[$j], $sd[$j]);
 			my $like = (1-$h) * pdf_normal ($baf[$i], 0, $sd[0]) + $h * pdf_normal ($baf[$i], $mu[$j], $sd[$j]);
 			if ($like) {
 				$ldel[$j] += log ($like);
@@ -412,7 +404,6 @@ sub pdf_normal {
  	-v, --verbose			use verbose output
  	-h, --help			print help message
  	-m, --man			print complete documentation
- 	    --signalfile <file>		signal intensity file
  	    --snpposfile <file>		a file with chr/position information for markers
  	    --bin <int>			the BIN for grouping SNPs together (default: 100)
  	    --grid <int>		the GRID for precision of alpha estimate (default: 10)
@@ -421,8 +412,6 @@ sub pdf_normal {
  Function: identify copy number for a mixed population of cells with two components
 
  Example: tumor_cnv.pl signal.txt hhall.hmm
-
- Version: $LastChangedDate: 2010-06-15 11:09:48 -0400 (Tue, 15 Jun 2010) $
 
 =head1 OPTIONS
 
@@ -444,10 +433,20 @@ use verbose output
 
 specify the output file name (default is to print to STDOUT)
 
-=item B<--signalfile>
+=item B<--snpposfile>
 
-a signal intensity file that annotates the Chr and Position for each SNP markers
+a file with Chr and Position information for each marker (if the signalfile does
+not contain this information)
 
+=item B<--bin>
+
+the BIN for grouping SNPs together, with a default value of 100 which works well
+for typical high-density SNP arrays
+
+=item B<--grid>
+
+the GRID for precision of alpha estimate, with a default value of 10 but a higher
+value such as 50 can be specified for high-density SNP arrays
 
 =back
 

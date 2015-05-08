@@ -1,7 +1,7 @@
 PennCNV2
 --------
 
-A software package for detection of copy number alterations on tumor samples from SNP arrays and NGS data
+A C++ software package for detection of copy number alterations on tumor samples from SNP arrays and NGS data
 
 PREREQUISITES
 -------------
@@ -26,7 +26,7 @@ make
 CONFIGURATION
 -------------
 
-You will now want to set some optional tuning parameters in the XML file that is directly relevant to the desired analysis.  Valid analysis strings are "tumor_cnv" and "seq_cnv".  The latter analysis is currently under development and should not be used yet.
+You will now want to set some optional tuning parameters in the XML file that is directly relevant to the desired analysis.  Valid analysis strings are "tumor_cnv" and "seq_cnv".  The latter analysis is currently under development.
 
 The XML file must be named <analysis string>.xml (e.g. tumor_cnv.xml for the tumor CNV method).
 
