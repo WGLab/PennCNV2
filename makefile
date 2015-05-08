@@ -14,7 +14,7 @@ USE_GPU=0
 USE_MPI=0
 USE_DB=0
 
-CFLAGS=$(COMMONCFLAGS) $(BOOST_INC_FLAGS)
+CFLAGS=$(COMMONCFLAGS) $(BOOST_INC_FLAGS) $(GSL_INC_FLAGS)
 LINKFLAGS=$(COMMONLINKFLAGS) $(BOOST_LIB_FLAGS) $(GSL_LIB_FLAGS)
 
 # below we can dynamically add in the dependent libraries and include flags
