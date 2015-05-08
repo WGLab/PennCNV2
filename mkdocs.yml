@@ -1,0 +1,25 @@
+site_name: PennCNV2
+site_url: http://penncnv2.openbioinformatics.org/
+repo_url: http://github.com/WangGenomicsLab/PennCNV2/
+repo_name: GitHub
+site_description: PennCNV2 software distribution site
+site_author: Gary Chen, Kai Wang
+site_favicon: favicon.ico
+copyright: 2010-2015 PennCNV2
+google_analytics: ['UA-7565671-1', 'penncnv2.openbioinformatics.org']
+
+docs_dir: docs
+#include_search: true
+#use_absolute_urls: true
+#use_directory_urls: false
+
+pages:
+- ['index.md', 'PennCNV2']
+
+# User Guide
+- ['user-guide/download.md', 'User Guide', 'Download PennCNV2']
+- ['user-guide/install.md', 'User Guide', 'Install PennCNV2']
+- ['user-guide/usage.md', 'User Guide', 'Usage Instructions']
+
+
+
