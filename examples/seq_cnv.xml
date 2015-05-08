@@ -1,0 +1,16 @@
+<input_filelist>filelist.seq</input_filelist>
+<pfb_file>pfb</pfb_file>
+<output_dir>results</output_dir>
+<!-- the following are tuning parameters relevant for either tumor or sequencing analysis-->
+<seq_info>
+  <shape>10</shape>
+  <dispersion>9.8</dispersion>
+  <mean_coverage_offset>5</mean_coverage_offset>
+</seq_info>
+<baf_sd_percent>
+  <0>1</0>
+  <25>1</25>
+  <33>1</33>
+  <50>1</50>
+</baf_sd_percent>
+<baf_sd_homo_del>0.2</baf_sd_homo_del>

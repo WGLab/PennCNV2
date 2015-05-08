@@ -1,0 +1,24 @@
+<input_filelist>filelist.tumor</input_filelist>
+<pfb_file>pfb</pfb_file>
+<output_dir>results</output_dir>
+<!-- the following are tuning parameters relevant for either tumor or sequencing analysis-->
+<lrr_sd_cn>
+  <stromal>
+    <1>.07</1>
+    <33>.07</33>
+    <66>.07</66>
+    <99>.07</99>
+  </stromal>
+  <loh>
+    <2>1</2>
+  </loh>
+</lrr_sd_cn>
+<lrr_sd_normal>1</lrr_sd_normal>
+<alpha_sd>.5</alpha_sd>
+<baf_sd_percent>
+  <0>1</0>
+  <25>1</25>
+  <33>1</33>
+  <50>1</50>
+</baf_sd_percent>
+<baf_sd_homo_del>0.2</baf_sd_homo_del>
